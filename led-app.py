@@ -19,6 +19,7 @@ def turn_led(flag) :
         gpio.output(LED0, gpio.LOW)
 
 def create_socket() :
+    global s
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.bind((HOST, PORT))
     s.listen(1)
