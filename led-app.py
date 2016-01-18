@@ -10,9 +10,11 @@ s = None
 
 LED0 = 18
 
-def turn_led(flag) :
+def init_gpio() :
     gpio.setmode(gpio.BOARD)
     gpio.setup(LED0, gpio.OUT)
+
+def turn_led(flag) :
     if flag == '0x00' :
         gpio.output(LED0, gpio.HIGH)
     else :
@@ -25,9 +27,11 @@ def create_socket() :
     s.listen(1)
 
 def main() :
+    init_gpio()
     create_socket()
     while 1 :
         conn, addr = s.accept()
+        print conn, addr
         data = conn.recv(1)
         turn_led(data)
         conn.send('0x00')
